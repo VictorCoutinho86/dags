@@ -9,7 +9,7 @@ from airflow.providers.slack.notifications.slack import send_slack_notification
 
 
 # DAG arguments
-failure_message = Connection.get_connection_from_secrets("on_failure_message")
+failure_message = failure_message = Connection.get_connection_from_secrets("on_failure_message").extra_dejson.get("message")
 
 default_args = {
     "owner": "airflow",
