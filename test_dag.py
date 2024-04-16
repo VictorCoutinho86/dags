@@ -21,7 +21,7 @@ default_args = {
     "retries": 0,
     "retry_delay": timedelta(minutes=5),
     "on_failure_callback": send_slack_notification(
-        text=failure_message.description,
+        text=failure_message,
         channel="bi-airflow-victor",
         username="airflow",
     ),
