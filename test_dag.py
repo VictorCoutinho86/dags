@@ -38,7 +38,7 @@ dag = DAG(dag_id="tutorial_v1.1.1", default_args=default_args, schedule_interval
 # BashOperator is a operator that performs a bash command
 
 # t1 is a simple task that shows the date
-t1 = BashOperator(task_id="print_date", bash_command="{{ ts }}", dag=dag)
+t1 = BashOperator(task_id="print_date", bash_command="date", dag=dag)
 
 # t2 sleeps the execution for 5 seconds
 t2 = BashOperator(task_id="sleep", bash_command="sleep 5", dag=dag)
