@@ -32,7 +32,7 @@ with DAG(dag_id="new_tutorial_v1.0.0", default_args=default_args, schedule_inter
     
     bash_command = BashOperator(
         task_id="new_command",
-        bash_command="It's time to run Airflow commands"
+        bash_command="It\'s time to run Airflow commands"
     )
     
     airflow_command = BashOperator(
