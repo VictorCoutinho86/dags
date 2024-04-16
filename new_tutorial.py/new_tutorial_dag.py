@@ -28,7 +28,7 @@ default_args = {
 }
 
 # Instantiating DAG, its arguments and schedule interval
-with DAG(dag_id="tutorial_v1.1.1", default_args=default_args, schedule_interval=pendulum.timedelta(1), catchup=False) as dag:
+with DAG(dag_id="new_tutorial_v1.0.0", default_args=default_args, schedule_interval=pendulum.timedelta(1), catchup=False) as dag:
     
     bash_command = BashOperator(
         task_id="new_command",
