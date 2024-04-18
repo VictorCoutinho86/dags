@@ -8,8 +8,7 @@ from datetime import datetime, timedelta
 from airflow.providers.slack.notifications.slack import send_slack_notification
 
 
-# DAG arguments
-failure_message = failure_message = Connection.get_connection_from_secrets("on_failure_message").extra_dejson.get("message")
+failure_message = Connection.get_connection_from_secrets("messages").extra_dejson.get("on_failure_message")
 
 default_args = {
     "owner": "airflow",
