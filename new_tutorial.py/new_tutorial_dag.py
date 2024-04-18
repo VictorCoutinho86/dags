@@ -37,7 +37,7 @@ with DAG(dag_id="new_tutorial_v1.0.0", default_args=default_args, schedule_inter
     
     airflow_command = BashOperator(
         task_id="airflow_command",
-        bash_command="airflow connections get on_failure_message -o json"
+        bash_command="airflow connections get messages -o json"
     )
     
     bash_command >> airflow_command
