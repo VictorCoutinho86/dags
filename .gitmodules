@@ -1,0 +1,3 @@
+[submodule "new_dag_sample"]
+	path = new_dag_sample
+	url = https://github.com/VictorCoutinho86/new_dag_sample.git
