@@ -2,32 +2,29 @@
 Code that goes along with the Airflow located at:
 http://airflow.readthedocs.org/en/latest/tutorial.html
 """
-from airflow.models import DAG, Connection
-from airflow.operators.bash import BashOperator
-from datetime import datetime, timedelta
+import pendulum
+from airflow.sdk import DAG
+from airflow.providers.standard.operators.bash import BashOperator
 from airflow.providers.slack.notifications.slack import send_slack_notification
-
-
-failure_message = Connection.get_connection_from_secrets("messages").extra_dejson.get("on_failure_message")
 
 default_args = {
     "owner": "airflow",
     "depends_on_past": False,
-    "start_date": datetime(2023, 6, 1),
+    "start_date": pendulum.today('UTC').subtract(days=1),
     "email": ["airflow@airflow.com"],
     "email_on_failure": False,
     "email_on_retry": False,
     "retries": 0,
-    "retry_delay": timedelta(minutes=5),
+    "retry_delay": pendulum.duration(seconds=60),
     "on_failure_callback": send_slack_notification(
-        text=failure_message,
+        text="Deu ruim aqui!!",
         channel="bi-airflow-victor",
         username="airflow",
     ),
 }
 
 # Instantiating DAG, its arguments and schedule interval
-dag = DAG(dag_id="tutorial_v1.1.1", default_args=default_args, schedule_interval=timedelta(1), catchup=False)
+dag = DAG(dag_id="tutorial", default_args=default_args, schedule=None, catchup=False)
 
 
 # DAGs are composed of tasks. Each task perform a specific operation. 
@@ -64,7 +61,4 @@ t3 = BashOperator(
 # Here the dependencies between tasks are defined
 # t2 will be executed after t1, and t3 will be executed after t2
 # the lines below can be replaced by a single line:
-# t1 >> t2 >> t3
-
-t2.set_upstream(t1)
-t3.set_upstream(t1)
+t1 >> [t2, t3]
