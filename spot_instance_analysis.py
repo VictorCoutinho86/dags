@@ -8,7 +8,7 @@ from airflow.decorators import dag, task
 @dag(
     dag_id="spot_instance_analysis",
     start_date=datetime(2025, 1, 1),
-    schedule_interval="@daily",
+    schedule=None,
     catchup=False,
     default_args={
         "owner": "airflow",
