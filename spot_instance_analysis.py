@@ -60,7 +60,9 @@ def spot_instance_analysis_dag():
         if not filtered_data or not filtered_data["instance_list"]:
             return []
 
-        client = boto3.client("ec2", region_name=region)
+        hook = AwsBaseHook(aws_conn_id="aws_default", client_type="ec2")
+        client = hook.get_client_type("ec2", region_name=region)
+        # client = boto3.client("ec2", region_name=region)
         yesterday = datetime.now() - timedelta(seconds=1)
 
         response = client.describe_spot_price_history(
