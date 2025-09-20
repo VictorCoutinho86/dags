@@ -3,6 +3,7 @@ import requests
 import boto3
 import pandas as pd
 from airflow.decorators import dag, task
+from airflow.providers.amazon.aws.hooks.base_aws import AwsBaseHook
 
 
 @dag(
