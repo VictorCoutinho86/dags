@@ -23,7 +23,7 @@ with DAG(
     ) as dag:
     submit_spark_pi = SparkKubernetesOperator(
         task_id="submit_spark_pi",
-        namespace="spark",
+        namespace="spark-operator",
         application_file="pi-on-yunikorn.yaml",
         do_xcom_push=True,
     )
