@@ -14,6 +14,8 @@ spec:
   imagePullPolicy: Always
   mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
   sparkVersion: "3.5.3"
+  arguments:
+  - "10000"
   restartPolicy:
     type: OnFailure
     onFailureRetries: 1
@@ -34,8 +36,16 @@ spec:
       karpenter.sh/capacity-type: "on-demand"
   executor:
     cores: 1
-    instances: 2
+    instances: 1
     memory: "512m"
     serviceAccount: spark-sa
     labels:
       version: 3.5.3
+  dynamicAllocation:
+    enabled: true
+    initialExecutors: 2
+    maxExecutors: 5
+    minExecutors: 1
+  batchScheduler: yunikorn
+  batchSchedulerOptions:
+    queue: root.default
