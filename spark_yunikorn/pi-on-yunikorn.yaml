@@ -15,7 +15,7 @@ spec:
   mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
   sparkVersion: "3.5.3"
   arguments:
-  - "10000"
+  - "1000"
   restartPolicy:
     type: OnFailure
     onFailureRetries: 1
