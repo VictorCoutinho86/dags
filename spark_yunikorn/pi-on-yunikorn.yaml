@@ -16,12 +16,22 @@ spec:
   sparkVersion: "3.5.3"
   arguments:
   - "1000"
+  sparkConf:
+    # Expose Spark metrics for Prometheus
+    "spark.ui.prometheus.enabled": "true"
+    "spark.executor.processTreeMetrics.enabled": "true"
+    "spark.metrics.conf.*.sink.prometheusServlet.class": "org.apache.spark.metrics.sink.PrometheusServlet"
+    "spark.metrics.conf.driver.sink.prometheusServlet.path": "/metrics/driver/prometheus/"
+    "spark.metrics.conf.executor.sink.prometheusServlet.path": "/metrics/executors/prometheus/"
   restartPolicy:
     type: OnFailure
     onFailureRetries: 1
     onFailureRetryInterval: 10
     onSubmissionFailureRetries: 5
     onSubmissionFailureRetryInterval: 20
+  batchScheduler: yunikorn
+  batchSchedulerOptions:
+    queue: root.default
   driver:
     cores: 1
     coreLimit: "1200m"
@@ -43,9 +53,6 @@ spec:
       version: 3.5.3
   dynamicAllocation:
     enabled: true
-    initialExecutors: 2
-    maxExecutors: 5
+    initialExecutors: 3
+    maxExecutors: 10
     minExecutors: 1
-  batchScheduler: yunikorn
-  batchSchedulerOptions:
-    queue: root.default
