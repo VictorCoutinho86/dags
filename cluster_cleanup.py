@@ -19,7 +19,7 @@ from kubernetes import client, config
 def cluster_cleanup():
     @task
     def cleanup_ebs_volumes(**kwargs):
-        ec2 = boto3.client("ec2")
+        ec2 = boto3.client("ec2", region_name='us-east-1')
         response = ec2.describe_volumes(
             Filters=[
                 {"Name": "status", "Values": ["available"]}  # volumes "available" não estão anexados
@@ -46,7 +46,7 @@ def cluster_cleanup():
 
         pods = v1.list_pod_for_all_namespaces(watch=False)
         for pod in pods.items:
-            if pod.status.phase == "Failed" or pod.status.phase == "Error":
+            if pod.status.phase == "Failed" or pod.status.phase == "Error" or pod.status.phase == "Completed":
                 name = pod.metadata.name
                 namespace = pod.metadata.namespace
                 print(f"Deletando pod {name} no namespace {namespace} com status {pod.status.phase}")
