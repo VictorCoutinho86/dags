@@ -50,7 +50,7 @@ def spot_instance_analysis_dag():
         instance_list = [
             meta["name"]
             for meta in instances.values()
-            if meta.get("interruption_frequency") == "<5%" and meta["cores"] >= 2 and meta["ram_gb"] >= 2
+            if meta.get("interruption_frequency") == "<5%" and meta["cores"] >= 1 and meta["ram_gb"] >= 1
         ]
 
         return {"instances": instances, "instance_list": instance_list}
