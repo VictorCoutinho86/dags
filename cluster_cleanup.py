@@ -61,5 +61,5 @@ def cluster_cleanup():
                 except Exception as e:
                     print(f"⚠️ Erro ao deletar pod {name}: {e}")
 
-    cleanup_pods() >> cleanup_ebs_volumes()
+    cleanup_ebs_volumes() >> cleanup_pods()
 cluster_cleanup()
