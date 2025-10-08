@@ -56,7 +56,7 @@ def cluster_cleanup():
                     v1.delete_namespaced_pod(
                         name=name,
                         namespace=namespace,
-                        body=client.V1DeleteOptions(grace_period_seconds=0)
+                        body=client.V1DeleteOptions(grace_period_seconds=30)
                     )
                 except Exception as e:
                     print(f"⚠️ Erro ao deletar pod {name}: {e}")
