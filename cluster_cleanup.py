@@ -11,7 +11,7 @@ from kubernetes import client, config
         "retry_delay": timedelta(minutes=5),
     },
     description="Limpeza de EBS e pods com erro",
-    schedule="@hourly",  # roda a cada hora
+    schedule="0 30 * * *",
     start_date=datetime(2025, 1, 1),
     catchup=False,
     tags=["cleanup", "aws", "k8s"],
