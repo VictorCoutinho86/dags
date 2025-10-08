@@ -39,21 +39,27 @@ def cluster_cleanup():
                     print(f"Erro ao deletar volume {vol_id}: {e}")
 
     @task
-    def cleanup_error_pods(**kwargs):
-        # Carrega configuração do Kubernetes (assumindo que está rodando dentro do cluster)
+    def cleanup_pods(**kwargs):
+        # Carrega a configuração do Kubernetes (assume execução dentro do cluster)
         config.load_incluster_config()
         v1 = client.CoreV1Api()
-
+    
         pods = v1.list_pod_for_all_namespaces(watch=False)
         for pod in pods.items:
-            if pod.status.phase == "Failed" or pod.status.phase == "Error" or pod.status.phase == "Completed":
-                name = pod.metadata.name
-                namespace = pod.metadata.namespace
-                print(f"Deletando pod {name} no namespace {namespace} com status {pod.status.phase}")
+            phase = pod.status.phase
+            name = pod.metadata.name
+            namespace = pod.metadata.namespace
+    
+            if phase in ["Failed", "Succeeded"]:
+                print(f"🧹 Deletando pod {name} no namespace {namespace} com status {phase}")
                 try:
-                    v1.delete_namespaced_pod(name=name, namespace=namespace)
+                    v1.delete_namespaced_pod(
+                        name=name,
+                        namespace=namespace,
+                        body=client.V1DeleteOptions(grace_period_seconds=0)
+                    )
                 except Exception as e:
-                    print(f"Erro ao deletar pod {name}: {e}")
+                    print(f"⚠️ Erro ao deletar pod {name}: {e}")
 
-    cleanup_error_pods() >> cleanup_ebs_volumes()
+    cleanup_pods() >> cleanup_ebs_volumes()
 cluster_cleanup()
