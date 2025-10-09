@@ -17,6 +17,8 @@ spec:
   arguments:
   - "1000"
   sparkConf:
+    "spark.driver.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
+    "spark.executor.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
     # Expose Spark metrics for Prometheus
     "spark.ui.prometheus.enabled": "true"
     "spark.executor.processTreeMetrics.enabled": "true"
