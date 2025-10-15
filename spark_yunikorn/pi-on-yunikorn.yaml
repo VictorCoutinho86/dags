@@ -46,6 +46,7 @@ spec:
     # ephemeral-storage requests and limits can be used to manage the storage utilization
     nodeSelector:
       karpenter.sh/capacity-type: "on-demand"
+      karpenter.sh/provisioner-name: "spark-compute"
   executor:
     cores: 1
     instances: 1
@@ -53,6 +54,8 @@ spec:
     serviceAccount: spark-sa
     labels:
       version: 3.5.3
+    nodeSelector:
+      karpenter.sh/provisioner-name: "spark-compute"
   dynamicAllocation:
     enabled: true
     initialExecutors: 3
