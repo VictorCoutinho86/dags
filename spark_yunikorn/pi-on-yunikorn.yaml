@@ -25,15 +25,18 @@ spec:
     "spark.metrics.conf.*.sink.prometheusServlet.class": "org.apache.spark.metrics.sink.PrometheusServlet"
     "spark.metrics.conf.driver.sink.prometheusServlet.path": "/metrics/driver/prometheus/"
     "spark.metrics.conf.executor.sink.prometheusServlet.path": "/metrics/executors/prometheus/"
+    # Apache Yunikorn configuration
+    "spark.kubernetes.scheduler.name": "yunikorn"
+    "spark.kubernetes.driver.label.queue": "root.default"
+    "spark.kubernetes.executor.label.queue": "root.default"
+    "spark.kubernetes.driver.annotation.yunikorn.apache.org/app-id": "{{APP_ID}}"
+    "spark.kubernetes.executor.annotation.yunikorn.apache.org/app-id": "{{APP_ID}}"
   restartPolicy:
     type: OnFailure
     onFailureRetries: 1
     onFailureRetryInterval: 10
     onSubmissionFailureRetries: 5
     onSubmissionFailureRetryInterval: 20
-  batchScheduler: yunikorn
-  batchSchedulerOptions:
-    queue: root.default
   driver:
     cores: 1
     coreLimit: "1200m"
@@ -45,8 +48,8 @@ spec:
     # we do not need to leverage a hostPath mount or volume to leverage that storage.
     # ephemeral-storage requests and limits can be used to manage the storage utilization
     nodeSelector:
-      karpenter.sh/capacity-type: "on-demand"
-      workload-type: "spark"
+      "karpenter.sh/capacity-type": "on-demand"
+      "workload-type": "spark"
   executor:
     cores: 1
     instances: 1
@@ -55,8 +58,8 @@ spec:
     labels:
       version: 3.5.3
     nodeSelector:
-      karpenter.sh/capacity-type: "spot"
-      workload-type: "spark"
+      "karpenter.sh/capacity-type": "spot"
+      "workload-type": "spark"
   dynamicAllocation:
     enabled: true
     initialExecutors: 3
