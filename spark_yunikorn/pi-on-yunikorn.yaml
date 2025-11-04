@@ -47,7 +47,7 @@ spec:
     # ephemeral-storage requests and limits can be used to manage the storage utilization
     nodeSelector:
       "karpenter.sh/capacity-type": "on-demand"
-      "workload-type": "spark"
+    #   "workload-type": "spark"
   executor:
     cores: 1
     instances: 1
@@ -57,7 +57,7 @@ spec:
       version: 3.5.3
     nodeSelector:
       "karpenter.sh/capacity-type": "spot"
-      "workload-type": "spark"
+      # "workload-type": "spark"
   dynamicAllocation:
     enabled: true
     initialExecutors: 3
