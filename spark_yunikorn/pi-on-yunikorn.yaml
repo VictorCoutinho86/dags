@@ -15,7 +15,7 @@ spec:
   mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
   sparkVersion: "3.5.3"
   arguments:
-  - "1000"
+  - "100"
   sparkConf:
     "spark.driver.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
     "spark.executor.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
@@ -38,7 +38,7 @@ spec:
   driver:
     cores: 1
     coreLimit: "1200m"
-    memory: "512m"
+    memory: "1024m"
     labels:
       version: 3.5.3
     serviceAccount: spark-sa
@@ -47,19 +47,18 @@ spec:
     # ephemeral-storage requests and limits can be used to manage the storage utilization
     nodeSelector:
       "karpenter.sh/capacity-type": "on-demand"
-    #   "workload-type": "spark"
+      "workload-type": "spark"
   executor:
     cores: 1
     instances: 1
-    memory: "512m"
+    memory: "1024m"
     serviceAccount: spark-sa
     labels:
       version: 3.5.3
     nodeSelector:
-      "karpenter.sh/capacity-type": "spot"
-      # "workload-type": "spark"
+      "workload-type": "spark"
   dynamicAllocation:
     enabled: true
     initialExecutors: 3
-    maxExecutors: 10
+    maxExecutors: 5
     minExecutors: 1
