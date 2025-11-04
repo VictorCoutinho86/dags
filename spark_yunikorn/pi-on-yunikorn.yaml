@@ -29,8 +29,8 @@ spec:
     "spark.kubernetes.scheduler.name": "yunikorn"
     "spark.kubernetes.driver.label.queue": "root.default"
     "spark.kubernetes.executor.label.queue": "root.default"
-    "spark.kubernetes.driver.annotation.yunikorn.apache.org/app-id": "{{APP_ID}}"
-    "spark.kubernetes.executor.annotation.yunikorn.apache.org/app-id": "{{APP_ID}}"
+    "spark.kubernetes.driver.annotation.yunikorn.apache.org/app-id": "{{ params.APP_ID }}"
+    "spark.kubernetes.executor.annotation.yunikorn.apache.org/app-id": "{{ params.APP_ID }}"
   restartPolicy:
     type: OnFailure
     onFailureRetries: 1
