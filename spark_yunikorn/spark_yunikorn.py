@@ -23,7 +23,7 @@ with DAG(
     ) as dag:
     submit_spark_pi = SparkKubernetesOperator(
         task_id="submit_spark_pi",
-        namespace="airflow",
+        namespace="spark-operator",
         application_file="pi-on-yunikorn.yaml",
         do_xcom_push=False,
         get_logs=True
