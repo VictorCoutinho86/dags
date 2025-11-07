@@ -26,8 +26,7 @@ with DAG(
         namespace="spark-operator",
         application_file="pi-on-yunikorn.yaml",
         do_xcom_push=False,
-        get_logs=True,
-        api_group="sparkoperator.k8s.io"
+        get_logs=True
     )
 
     submit_spark_pi
