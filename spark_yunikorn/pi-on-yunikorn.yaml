@@ -51,7 +51,8 @@ spec:
         effect: "NoSchedule"
 
   executor:
-    cores: 0.8
+    coreRequest: "800m"
+    coreLimit: "1000m"
     instances: 4
     memory: "3300Mi"
     memoryOverhead: "350Mi"
