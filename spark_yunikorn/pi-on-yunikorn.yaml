@@ -36,8 +36,10 @@ spec:
 
   driver:
     cores: 1
-    coreLimit: "1200m"
-    memory: "1024m"
+    coreRequest: "500m"
+    coreLimit: "1000m"
+    memory: "1g"
+    memoryOverhead: "512m"
     labels:
       version: 3.5.3
     serviceAccount: spark-sa
@@ -51,11 +53,12 @@ spec:
         effect: "NoSchedule"
 
   executor:
+    instances: 4
+    cores: 1
     coreRequest: "800m"
     coreLimit: "1000m"
-    instances: 4
-    memory: "3300Mi"
-    memoryOverhead: "350Mi"
+    memory: "3g"
+    memoryOverhead: "512m"
     serviceAccount: spark-sa
     labels:
       version: 3.5.3
