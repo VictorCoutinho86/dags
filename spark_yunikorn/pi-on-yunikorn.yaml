@@ -54,8 +54,7 @@ spec:
 
   executor:
     cores: 1
-    coreRequest: "800m"
-    coreLimit: "1000m"
+    coreLimit: "900m"
     memory: "3g"
     memoryOverhead: "512m"
     serviceAccount: spark-sa
@@ -71,6 +70,6 @@ spec:
 
   dynamicAllocation:
     enabled: true
-    initialExecutors: 2
-    maxExecutors: 4
+    initialExecutors: 4
+    maxExecutors: 10
     minExecutors: 2
