@@ -53,7 +53,8 @@ spec:
 
   executor:
     cores: 1
-    coreLimit: "900m"
+    coreRequest: "800m"
+    coreLimit: "1000m"
     memory: "3g"
     memoryOverhead: "512m"
     serviceAccount: spark-sa
