@@ -75,6 +75,6 @@ spec:
 
   dynamicAllocation:
     enabled: true
-    initialExecutors: 6
-    maxExecutors: 12
-    minExecutors: 2
+    initialExecutors: 10
+    maxExecutors: 18
+    minExecutors: 4
