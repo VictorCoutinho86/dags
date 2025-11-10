@@ -36,7 +36,7 @@ spec:
 
   driver:
     cores: 1
-    coreLimit: "1000m"
+    coreLimit: "1200m"
     memory: "1g"
     memoryOverhead: "512m"
     labels:
