@@ -15,7 +15,7 @@ spec:
   mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
   sparkVersion: "3.5.3"
   arguments:
-    - "100"
+    - "10000"
   sparkConf:
     "spark.driver.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
     "spark.executor.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
@@ -70,6 +70,6 @@ spec:
 
   dynamicAllocation:
     enabled: true
-    initialExecutors: 4
-    maxExecutors: 10
+    initialExecutors: 6
+    maxExecutors: 12
     minExecutors: 2
