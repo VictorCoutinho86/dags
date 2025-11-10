@@ -22,6 +22,7 @@ spec:
     "spark.executor.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
     "spark.ui.prometheus.enabled": "true"
     "spark.executor.processTreeMetrics.enabled": "true"
+    "spark.dynamicAllocation.shuffleTracking.enabled": "true"
     "spark.metrics.conf.*.sink.prometheusServlet.class": "org.apache.spark.metrics.sink.PrometheusServlet"
     "spark.metrics.conf.driver.sink.prometheusServlet.path": "/metrics/driver/prometheus/"
     "spark.metrics.conf.executor.sink.prometheusServlet.path": "/metrics/executors/prometheus/"
