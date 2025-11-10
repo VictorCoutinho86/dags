@@ -66,12 +66,12 @@ spec:
         value: "spark"
         effect: "NoSchedule"
     affinity:
-    podAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        - labelSelector:
-            matchLabels:
-              spark-role: driver
-          topologyKey: topology.kubernetes.io/zone
+      podAffinity:
+        requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                spark-role: driver
+            topologyKey: topology.kubernetes.io/zone
 
   dynamicAllocation:
     enabled: true
