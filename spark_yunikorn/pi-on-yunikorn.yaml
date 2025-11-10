@@ -1,7 +1,7 @@
 apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: pyspark-pi-karpenter-{{ ts_nodash }}
+  name: pyspark-pi-karpenter
   namespace: spark-operator
   labels:
     app: "pyspark-pi"
@@ -17,6 +17,7 @@ spec:
   arguments:
     - "10000"
   sparkConf:
+    "spark.app.name": "pyspark-pi-karpenter"
     "spark.driver.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
     "spark.executor.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
     "spark.ui.prometheus.enabled": "true"
@@ -67,6 +68,13 @@ spec:
         operator: "Equal"
         value: "spark"
         effect: "NoSchedule"
+    affinity:
+    podAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        - labelSelector:
+            matchLabels:
+              spark-role: driver
+          topologyKey: topology.kubernetes.io/zone
 
   dynamicAllocation:
     enabled: true
