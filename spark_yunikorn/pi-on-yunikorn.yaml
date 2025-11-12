@@ -1,7 +1,7 @@
 apiVersion: "sparkoperator.k8s.io/v1beta2"
 kind: SparkApplication
 metadata:
-  name: "spark-pi-{{ ds }}-{{ task_instance.try_number }}"
+  name: "spark-pi-{{ ds_nodash }}-{{ task_instance.try_number }}"
   namespace: spark-operator
 spec:
   type: Python
@@ -35,11 +35,13 @@ spec:
 
   driver:
     cores: 1
-    coreLimit: "1200m"
-    memory: "1g"
+    coreRequest: "800m"
+    coreLimit: "1000m"
+    memory: "2g"
     memoryOverhead: "512m"
     labels:
       version: 3.5.3
+      app: spark
     serviceAccount: spark-sa
     nodeSelector:
       "karpenter.sh/capacity-type": "on-demand"
@@ -52,12 +54,15 @@ spec:
 
   executor:
     cores: 1
-    coreLimit: "1200m"
+    instances: 8
+    coreRequest: "800m"
+    coreLimit: "1000m"
     memory: "3g"
     memoryOverhead: "512m"
     serviceAccount: spark-sa
     labels:
       version: 3.5.3
+      app: spark
     nodeSelector:
       "workload-type": "spark"
     tolerations:
@@ -77,4 +82,4 @@ spec:
     enabled: true
     initialExecutors: 8
     maxExecutors: 16
-    minExecutors: 4
+    minExecutors: 8
