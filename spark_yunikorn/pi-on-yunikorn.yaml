@@ -35,10 +35,7 @@ spec:
 
   driver:
     cores: 1
-    coreRequest: "800m"
-    coreLimit: "1000m"
-    memory: "2g"
-    memoryOverhead: "512m"
+    memory: "512m"
     labels:
       version: 3.5.3
       app: spark
@@ -54,11 +51,8 @@ spec:
 
   executor:
     cores: 1
-    instances: 8
-    coreRequest: "800m"
-    coreLimit: "1000m"
-    memory: "3g"
-    memoryOverhead: "512m"
+    instances: 16
+    memory: "512m"
     serviceAccount: spark-sa
     labels:
       version: 3.5.3
@@ -80,6 +74,6 @@ spec:
 
   dynamicAllocation:
     enabled: true
-    initialExecutors: 8
-    maxExecutors: 16
-    minExecutors: 8
+    initialExecutors: 16
+    maxExecutors: 32
+    minExecutors: 16
