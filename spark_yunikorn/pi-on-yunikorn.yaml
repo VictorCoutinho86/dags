@@ -12,7 +12,7 @@ spec:
   mainApplicationFile: local:///opt/spark/examples/src/main/python/pi.py
   sparkVersion: "3.5.3"
   arguments:
-    - "10000"
+    - "100000"
   sparkConf:
     "spark.app.name": "pyspark-pi-karpenter"
     "spark.driver.extraJavaOptions": "-Dlog4j.rootCategory=WARN,console"
@@ -75,5 +75,5 @@ spec:
   dynamicAllocation:
     enabled: true
     initialExecutors: 16
-    maxExecutors: 32
+    maxExecutors: 64
     minExecutors: 16
