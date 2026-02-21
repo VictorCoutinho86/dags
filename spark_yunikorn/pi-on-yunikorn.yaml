@@ -30,7 +30,7 @@ spec:
 
   driver:
     cores: 1
-    memory: 2Gi
+    memory: "1024m"
     labels:
       version: 
       app: spark
