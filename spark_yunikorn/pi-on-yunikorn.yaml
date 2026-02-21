@@ -30,9 +30,9 @@ spec:
 
   driver:
     cores: 1
-    memory: "1024m"
+    memory: 2Gi
     labels:
-      version: 
+      version: 3.5.3
       app: spark
     serviceAccount: spark-sa
     nodeSelector:
