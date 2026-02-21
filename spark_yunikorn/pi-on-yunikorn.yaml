@@ -20,12 +20,9 @@ spec:
     "spark.ui.prometheus.enabled": "true"
     "spark.executor.processTreeMetrics.enabled": "true"
     "spark.dynamicAllocation.shuffleTracking.enabled": "true"
-    "spark.metrics.conf.*.sink.prometheusServlet.class": "org.apache.spark.metrics.sink.PrometheusServlet"
-    "spark.metrics.conf.driver.sink.prometheusServlet.path": "/metrics/driver/prometheus/"
-    "spark.metrics.conf.executor.sink.prometheusServlet.path": "/metrics/executors/prometheus/"
     "spark.kubernetes.scheduler.name": "yunikorn"
-    "spark.kubernetes.driver.label.queue": "root.default"
-    "spark.kubernetes.executor.label.queue": "root.default"
+    "spark.kubernetes.driver.label.queue": "root.engineering"
+    "spark.kubernetes.executor.label.queue": "root.engineering"
   restartPolicy:
     type: OnFailure
     onFailureRetries: 1
@@ -35,9 +32,9 @@ spec:
 
   driver:
     cores: 1
-    memory: "512m"
+    memory: 2Gi
     labels:
-      version: 3.5.3
+      version: 
       app: spark
     serviceAccount: spark-sa
     nodeSelector:
@@ -50,9 +47,9 @@ spec:
         effect: "NoSchedule"
 
   executor:
-    cores: 1
-    instances: 16
-    memory: "512m"
+    cores: 3
+    memory: 20Gi
+    memoryOverhead: 4Gi
     serviceAccount: spark-sa
     labels:
       version: 3.5.3
@@ -74,6 +71,6 @@ spec:
 
   dynamicAllocation:
     enabled: true
-    initialExecutors: 16
-    maxExecutors: 32
-    minExecutors: 16
+    initialExecutors: 8
+    maxExecutors: 12
+    minExecutors: 4
