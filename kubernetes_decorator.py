@@ -1,6 +1,5 @@
 from datetime import datetime
-from airflow import DAG
-from airflow.decorators import task
+from airflow.sdk import DAG, task
 
 with DAG(
     dag_id="example_kubernetes_decorator",
