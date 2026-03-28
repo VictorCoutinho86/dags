@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 import requests
 import boto3
 import pandas as pd
-from airflow.decorators import dag, task
+from airflow.sdk import dag, task
 
 
 @dag(
