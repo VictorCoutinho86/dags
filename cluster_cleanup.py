@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta
 import boto3
-from airflow.decorators import dag, task
+from airflow.sdk import dag, task
 from kubernetes import client, config
 
 @dag(
